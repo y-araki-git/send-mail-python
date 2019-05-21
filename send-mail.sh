@@ -1,64 +1,64 @@
 #!/bin/bash
 #
-# [ƒXƒNƒŠƒvƒg–¼]
+# [ã‚¹ã‚¯ãƒªãƒ—ãƒˆå]
 # send-mail.sh
 #
-# [ˆø”]
-#  ‚È‚µ
+# [å¼•æ•°]
+#  ãªã—
 #
-# [–ß‚è’l]
-#  0:³íI—¹
-#  1:ˆÙíI—¹
+# [æˆ»ã‚Šå€¤]
+#  0:æ­£å¸¸çµ‚äº†
+#  1:ç•°å¸¸çµ‚äº†
 #
-# [ˆ—“à—e]
-#  ÀsŒ‹‰Êƒ[ƒ‹‘—M
-#  I—¹ˆ—
+# [å‡¦ç†å†…å®¹]
+#  å®Ÿè¡Œçµæœãƒ¡ãƒ¼ãƒ«é€ä¿¡
+#  çµ‚äº†å‡¦ç†
 #
 #--------------------------------------------
 #============================================
-# ì‹Æ—p•Ï”
+# ä½œæ¥­ç”¨å¤‰æ•°
 #============================================
-# ƒ^ƒCƒ€ƒXƒ^ƒ“ƒv
+# ã‚¿ã‚¤ãƒ ã‚¹ã‚¿ãƒ³ãƒ—
 NOW=`date "+%Y-%m-%d %H:%M:%S"`
-# “ú•t
+# æ—¥ä»˜
 TODAY=`date "+%Y%m%d"`
-# ì‹Æƒ‹[ƒgƒfƒBƒŒƒNƒgƒŠ
+# ä½œæ¥­ãƒ«ãƒ¼ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 WORK_DIR="$(dirname $0)/"
-# ƒƒOŠi”[ƒfƒBƒŒƒNƒgƒŠ
+# ãƒ­ã‚°æ ¼ç´ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 LOG_DIR="${WORK_DIR}log"
-# ƒXƒNƒŠƒvƒgƒƒOƒtƒ@ƒCƒ‹
+# ã‚¹ã‚¯ãƒªãƒ—ãƒˆãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«
 SCRIPT_LOG="${LOG_DIR}/${TODAY}.script.log"
 
-## ƒ[ƒ‹‘—M—p•Ï”
-# ƒ[ƒ‹‘—MƒXƒNƒŠƒvƒg
-PY_SEND_MAIL="${WORK_DIR}/send_mail.py"
-# ‘—MŒ³ƒAƒhƒŒƒX
+## ãƒ¡ãƒ¼ãƒ«é€ä¿¡ç”¨å¤‰æ•°
+# ãƒ¡ãƒ¼ãƒ«é€ä¿¡ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
+PY_SEND_MAIL="${WORK_DIR}/send-mail.py"
+# é€ä¿¡å…ƒã‚¢ãƒ‰ãƒ¬ã‚¹
 FROM="noreply@xxx"
-# ‘—MæƒAƒhƒŒƒX
+# é€ä¿¡å…ˆã‚¢ãƒ‰ãƒ¬ã‚¹
 TO="server1@mail.test"
-# ‘—MæCCƒAƒhƒŒƒX
+# é€ä¿¡å…ˆCCã‚¢ãƒ‰ãƒ¬ã‚¹
 CC="user1@mail.test"
-# ³íI—¹ƒ[ƒ‹ƒ^ƒCƒgƒ‹
-SUBJECT_SUCCESS="yxxxzˆ—‚ªŠ®—¹‚µ‚Ü‚µ‚½B"
-# ˆÙíI—¹ƒ[ƒ‹ƒ^ƒCƒgƒ‹
-SUBJECT_FAILED="yxxxzˆ—‚ª¸”s‚µ‚Ü‚µ‚½B"
-# —áŠOƒ[ƒ‹ƒ^ƒCƒgƒ‹
-SUBJECT_EXCEPTION="yxxxzXX‚ª‘¶İ‚µ‚Ü‚¹‚ñB"
-# ˆ—Š®—¹ƒ[ƒ‹–{•¶
+# æ­£å¸¸çµ‚äº†æ™‚ãƒ¡ãƒ¼ãƒ«ã‚¿ã‚¤ãƒˆãƒ«
+SUBJECT_SUCCESS="ã€xxxã€‘å‡¦ç†ãŒå®Œäº†ã—ã¾ã—ãŸã€‚"
+# ç•°å¸¸çµ‚äº†æ™‚ãƒ¡ãƒ¼ãƒ«ã‚¿ã‚¤ãƒˆãƒ«
+SUBJECT_FAILED="ã€xxxã€‘å‡¦ç†ãŒå¤±æ•—ã—ã¾ã—ãŸã€‚"
+# ä¾‹å¤–ãƒ¡ãƒ¼ãƒ«ã‚¿ã‚¤ãƒˆãƒ«
+SUBJECT_EXCEPTION="ã€xxxã€‘XXãŒå­˜åœ¨ã—ã¾ã›ã‚“ã€‚"
+# å‡¦ç†å®Œäº†ãƒ¡ãƒ¼ãƒ«æœ¬æ–‡
 MAIL_TEMPLATE="${WORK_DIR}/mail-text.txt"
-# ƒGƒ‰[’Ê’mƒ[ƒ‹–{•¶
+# ã‚¨ãƒ©ãƒ¼é€šçŸ¥ãƒ¡ãƒ¼ãƒ«æœ¬æ–‡
 ERR_MAIL_TEMPLATE="${WORK_DIR}/error-mail-text.txt"
-# ƒGƒ‰[ƒAƒhƒŒƒXíœŒ‹‰Ê(str1)
+# ã‚¨ãƒ©ãƒ¼ã‚¢ãƒ‰ãƒ¬ã‚¹å‰Šé™¤çµæœ(str1)
 RESULT1="${WORK_DIR}/result/${TODAY}.result1.txt"
-# ƒGƒ‰[ƒAƒhƒŒƒXíœŒ‹‰Ê(str2)
+# ã‚¨ãƒ©ãƒ¼ã‚¢ãƒ‰ãƒ¬ã‚¹å‰Šé™¤çµæœ(str2)
 RESULT2="${WORK_DIR}/result/${TODAY}.result2.txt
 
 
 ######################################################################
-# ŠÖ”’è‹`
+# é–¢æ•°å®šç¾©
 ######################################################################
 #---------------------------------------------------------------------
-# ƒXƒNƒŠƒvƒgƒƒOo—Í
+# ã‚¹ã‚¯ãƒªãƒ—ãƒˆãƒ­ã‚°å‡ºåŠ›
 #---------------------------------------------------------------------
 function fnc_output_scriptlog() {
   (echo "$NOW: $1" >>$SCRIPT_LOG) 2>/dev/null
@@ -66,23 +66,23 @@ function fnc_output_scriptlog() {
 }
 
 #---------------------------------------------------------------------
-# ƒ[ƒ‹‘—MŠÖ”
+# ãƒ¡ãƒ¼ãƒ«é€ä¿¡é–¢æ•°
 #---------------------------------------------------------------------
-# ˆ—¬Œ÷
+# å‡¦ç†æˆåŠŸ
 function fnc_send_mail() {
   mail_text=$(sed -e 's#%HOSTNAME%#'$(hostname)'#' -e 's#%str1%#'"$(grep flag ${RESULT1} | awk '{print $2}')"'#' -e 's#%str2%#'"$(grep flag ${RESULT2} | awk '{print $2}')"'#' ${MAIL_TEMPLATE})
   echo "${mail_text}" | ${PY_SEND_MAIL} "${FROM}" "${TO}" "${CC}" "${SUBJECT_SUCCESS}"
   return $?
 }
 
-# ˆ—¸”s
+# å‡¦ç†å¤±æ•—
 function fnc_send_error_mail() {
   mail_text=$(sed -e 's#%HOSTNAME%#'$(hostname)'#' -e 's#%str%#'"$1"'#' ${ERR_MAIL_TEMPLATE})
   echo "${mail_text}" | ${PY_SEND_MAIL} "${FROM}" "${TO}" "${SUBJECT_FAILED}"
   return $?
 }
 
-# —áŠO
+# ä¾‹å¤–
 function fnc_send_exception_mail() {
   mail_text=$(sed -e 's#%HOSTNAME%#'$(hostname)'#' -e 's#%str%#'"$1"'#' ${ERR_MAIL_TEMPLATE})
   echo "${mail_text}" | ${PY_SEND_MAIL} "${FROM}" "${TO}" "${SUBJECT_EXCEPTION}"
@@ -90,24 +90,24 @@ function fnc_send_exception_mail() {
 }
 
 #============================================
-# ƒƒCƒ“ˆ—
+# ãƒ¡ã‚¤ãƒ³å‡¦ç†
 #============================================
 #--------------------------------------------
-# ÀsŒ‹‰Êƒ[ƒ‹‘—M
+# å®Ÿè¡Œçµæœãƒ¡ãƒ¼ãƒ«é€ä¿¡
 #--------------------------------------------
-fnc_output_scriptlog "ŠJn:ÀsŒ‹‰Êƒ[ƒ‹‘—M"
+fnc_output_scriptlog "é–‹å§‹:å®Ÿè¡Œçµæœãƒ¡ãƒ¼ãƒ«é€ä¿¡"
 
 fnc_send_mail
 
 if [ "$?" != "0" ];then
-    for i in fnc_output_scriptlog fnc_send_error_mail; do ${i} "ÀsŒ‹‰Êƒ[ƒ‹‘—M‚É¸”s‚µ‚Ü‚µ‚½B"; done
+    for i in fnc_output_scriptlog fnc_send_error_mail; do ${i} "å®Ÿè¡Œçµæœãƒ¡ãƒ¼ãƒ«é€ä¿¡ã«å¤±æ•—ã—ã¾ã—ãŸã€‚"; done
     exit 1
 fi
 
-fnc_output_scriptlog "I—¹:ÀsŒ‹‰Êƒ[ƒ‹‘—M"
+fnc_output_scriptlog "çµ‚äº†:å®Ÿè¡Œçµæœãƒ¡ãƒ¼ãƒ«é€ä¿¡"
 
 #============================================
-# I—¹ˆ—
+# çµ‚äº†å‡¦ç†
 #============================================
 
 exit 0
